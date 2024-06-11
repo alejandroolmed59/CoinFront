@@ -41,9 +41,9 @@ function CreateNote({ history }) {
   };
 
   return (
-    <MainScreen title="Create a Note">
+    <MainScreen title="Agregar nueva Moneda a mongodb">
       <Card>
-        <Card.Header>Create a New Note</Card.Header>
+        <Card.Header>Crear nueva moneda</Card.Header>
         <Card.Body>
           <Form onSubmit={submitHandler}>
             {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
