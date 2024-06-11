@@ -14,16 +14,27 @@ export const listNotes = () => async (dispatch, getState) => {
       type: NOTES_LIST_REQUEST,
     });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
+    //const { data } = await axios.get(`/api/notes`, config);
 
-    const config = {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
-    };
-    const { data } = await axios.get(`/api/notes`, config);
-
-    dispatch({ type: NOTES_LIST_SUCCESS, payload: data });
+    dispatch({
+      type: NOTES_LIST_SUCCESS,
+      payload: [
+        {
+          _id: "asd",
+          title: "HII",
+          category: "byu",
+          content: "sssss",
+          createdAt: "2024-04-10",
+        },
+        {
+          _id: "123",
+          title: "bitcoin",
+          category: "byu",
+          content: "sssss",
+          createdAt: "2024-04-10",
+        },
+      ],
+    });
   } catch (error) {
     const message =
       error.response && error.response.data.message
