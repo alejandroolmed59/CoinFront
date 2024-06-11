@@ -8,9 +8,12 @@ import ErrorMessage from "../../components/ErrorMessage";
 import ReactMarkDown from "react-markdown";
 
 function CreateNote({ history }) {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [category, setCategory] = useState("");
+  const [name, setName] = useState("");
+  const [country, setCountry] = useState("");
+  const [abbreviation, setAbbreviation] = useState("");
+  const [valueUsd, setValueUsd] = useState("");
+  const [isAvaliable, setIsAvailable] = useState(true);
+  const [img, setImg] = useState("");
 
   const dispatch = useDispatch();
 
@@ -20,15 +23,19 @@ function CreateNote({ history }) {
   console.log(note);
 
   const resetHandler = (handler) => {
-    setTitle("");
-    setCategory("");
-    setContent("");
+    setName("");
+    setCountry("");
+    setAbbreviation("");
+    setValueUsd("");
+    setIsAvailable(true);
+    setImg("");
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (!title || !content || !category) return;
-    dispatch(createNoteAction(title, content, category));
+    dispatch(
+      createNoteAction(name, country, abbreviation, valueUsd, isAvaliable, img)
+    );
     resetHandler();
     history.push("/mynotes");
   };
@@ -40,45 +47,67 @@ function CreateNote({ history }) {
         <Card.Body>
           <Form onSubmit={submitHandler}>
             {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-            <Form.Group controlId="title">
-              <Form.Label>Title</Form.Label>
+            <Form.Group controlId="name">
+              <Form.Label>Currency name</Form.Label>
               <Form.Control
                 type="text"
-                value={title}
-                placeholder="Enter the Title"
-                onChange={(e) => setTitle(e.target.value)}
+                value={name}
+                placeholder="Enter the currency name"
+                onChange={(e) => setName(e.target.value)}
               />
             </Form.Group>
 
-            <Form.Group controlId="content">
-              <Form.Label>Content</Form.Label>
+            <Form.Group controlId="country">
+              <Form.Label>Country of origin</Form.Label>
               <Form.Control
                 as="textarea"
-                value={content}
-                placeholder="Enter the Content"
-                rows={4}
-                onChange={(e) => setContent(e.target.value)}
+                value={country}
+                placeholder="Enter the Country of origin"
+                rows={2}
+                onChange={(e) => setCountry(e.target.value)}
               />
             </Form.Group>
-            {content && (
-              <Card>
-                <Card.Header>Note Preview</Card.Header>
-                <Card.Body>
-                  <ReactMarkDown>{content}</ReactMarkDown>
-                </Card.Body>
-              </Card>
-            )}
 
-            <Form.Group controlId="content">
-              <Form.Label>Category</Form.Label>
+            <Form.Group controlId="abbreviation">
+              <Form.Label>Abbreviation</Form.Label>
               <Form.Control
                 type="text"
-                value={category}
-                placeholder="Enter the Category"
-                onChange={(e) => setCategory(e.target.value)}
+                value={abbreviation}
+                placeholder="Enter the abbreviation"
+                onChange={(e) => setAbbreviation(e.target.value)}
               />
             </Form.Group>
-            {loading && <Loading size={50} />}
+            <Form.Group controlId="valueUsd">
+              <Form.Label>Valor en dolares</Form.Label>
+              <Form.Control
+                type="text"
+                value={valueUsd}
+                placeholder="Enter the valueUsd"
+                onChange={(e) => setValueUsd(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="isAvaliable">
+              <Form.Label>Esta en uso ?</Form.Label>
+              <Form.Check
+                type="switch"
+                id="isAvaliable"
+                value={isAvaliable}
+                onChange={(e) => {
+                  console.log(e.target.checked);
+                  setIsAvailable(e.target.checked);
+                }}
+              />
+            </Form.Group>
+            <Form.Group controlId="img">
+              <Form.Label>Image</Form.Label>
+              <Form.Control
+                type="text"
+                value={img}
+                placeholder="Enter the Image URL"
+                onChange={(e) => setImg(e.target.value)}
+              />
+            </Form.Group>
+
             <Button type="submit" variant="primary">
               Create Note
             </Button>

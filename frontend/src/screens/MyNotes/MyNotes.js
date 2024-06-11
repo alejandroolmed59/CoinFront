@@ -53,7 +53,7 @@ const MyNotes = ({ search }) => {
     <MainScreen title={`Welcome Back you..`}>
       <Link to="/createnote">
         <Button style={{ marginLeft: 10, marginBottom: 6 }} size="lg">
-          Create New Note
+          Create New Currency
         </Button>
       </Link>
       {errorDelete && (
@@ -75,12 +75,11 @@ const MyNotes = ({ search }) => {
                 }}
               >
                 <Accordion.Toggle as={Card.Text} variant="link" eventKey="0">
-                  {note.title}
+                  {note.name}
                 </Accordion.Toggle>
               </span>
 
               <div>
-                <Button href={`/note/${note._id}`}>Edit</Button>
                 <Button
                   variant="danger"
                   className="mx-2"
@@ -93,21 +92,26 @@ const MyNotes = ({ search }) => {
             <Accordion.Collapse eventKey="0">
               <Card.Body>
                 <h4>
-                  <Badge variant="success">Category - {note.category}</Badge>
+                  <Badge variant="success">
+                    Pais de origen - {note.country}
+                  </Badge>
                 </h4>
                 <blockquote className="blockquote mb-0">
-                  <p>{note.content}</p>
+                  <p>Valor en USD dollars: {note.valueUsd}</p>
                   <img
-                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/66.svg"
-                    height={100}
-                    width={100}
+                    src={note.img}
+                    height={200}
+                    width={200}
+                    alt="no disponible"
                   />
-                  <footer className="blockquote-footer">
-                    Create on{" "}
-                    <cite title="Source Title">
-                      {note.createdAt.substring(0, 10)}
-                    </cite>
-                  </footer>
+                  <h4>
+                    Estado{" "}
+                    {note.isAvaliable === true ? (
+                      <Badge variant="success">En circulacion</Badge>
+                    ) : (
+                      <Badge variant="warning">Fuera de circulacion</Badge>
+                    )}
+                  </h4>
                 </blockquote>
               </Card.Body>
             </Accordion.Collapse>

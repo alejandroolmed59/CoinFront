@@ -14,26 +14,11 @@ export const listNotes = () => async (dispatch, getState) => {
       type: NOTES_LIST_REQUEST,
     });
 
-    //const { data } = await axios.get(`/api/notes`, config);
-
+    const { data } = await axios.get(`/api/coin`);
+    console.log(data);
     dispatch({
       type: NOTES_LIST_SUCCESS,
-      payload: [
-        {
-          _id: "asd",
-          title: "HII",
-          category: "byu",
-          content: "sssss",
-          createdAt: "2024-04-10",
-        },
-        {
-          _id: "123",
-          title: "bitcoin",
-          category: "byu",
-          content: "sssss",
-          createdAt: "2024-04-10",
-        },
-      ],
+      payload: data.datos,
     });
   } catch (error) {
     const message =
@@ -49,32 +34,21 @@ export const listNotes = () => async (dispatch, getState) => {
 };
 
 export const createNoteAction =
-  (title, content, category) => async (dispatch, getState) => {
+  (name, country, abbreviation, valueUsd, isAvaliable, img) =>
+  async (dispatch, getState) => {
     try {
       dispatch({
         type: NOTES_CREATE_REQUEST,
       });
 
-      const {
-        userLogin: { userInfo },
-      } = getState();
-
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      };
-
-      const { data } = await axios.post(
-        `/api/notes/create`,
-        {
-          title,
-          content,
-          category,
-        },
-        config
-      );
+      const { data } = await axios.post(`/api/coin`, {
+        name,
+        country,
+        abbreviation,
+        valueUsd,
+        isAvaliable,
+        img,
+      });
     } catch (error) {
       const message =
         error.response && error.response.data.message
@@ -130,17 +104,7 @@ export const deleteNoteAction = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: NOTES_DELETE_REQUEST });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-
-    const { data } = await axios.delete(`/api/notes/${id}`, config);
+    const { data } = await axios.delete(`/api/coin/${id}`);
 
     dispatch({ type: NOTES_DELETE_SUCCESS, payload: data });
   } catch (error) {
