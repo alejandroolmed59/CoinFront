@@ -9,7 +9,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <main>
-        <Route path="/" exact component={() => <MyNotes />} /> />
+        <Route path="/" exact component={() => <MyNotes />} />
         <Route path="/createnote" component={CreateNote} />
         <Route path="/note/:id" component={SingleNote} />
         <Route path="/mynotes" component={() => <MyNotes />} />

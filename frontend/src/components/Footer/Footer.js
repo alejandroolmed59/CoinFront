@@ -10,13 +10,7 @@ const Footer = () => {
         display: "flex",
         justifyContent: "center",
       }}
-    >
-      <Container>
-        <Row>
-          <Col className="text-center py-3">Copyright &copy; JPS</Col>
-        </Row>
-      </Container>
-    </footer>
+    ></footer>
   );
 };
 

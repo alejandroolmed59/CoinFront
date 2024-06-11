@@ -50,9 +50,17 @@ const MyNotes = ({ search }) => {
   };
 
   return (
-    <MainScreen title={`Welcome Back you..`}>
+    <MainScreen title={"TELUS Workshop MongoDB"}>
+      <img
+        src={
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Telus-Logo.svg/2560px-Telus-Logo.svg.png"
+        }
+        height={70}
+        width={300}
+        alt="no disponible"
+      />
       <Link to="/createnote">
-        <Button style={{ marginLeft: 10, marginBottom: 6 }} size="lg">
+        <Button style={{ marginLeft: 60, marginBottom: 6 }} size="lg">
           Create New Currency
         </Button>
       </Link>
@@ -75,7 +83,7 @@ const MyNotes = ({ search }) => {
                 }}
               >
                 <Accordion.Toggle as={Card.Text} variant="link" eventKey="0">
-                  {note.name}
+                  {note.name} - {note.abbreviation}
                 </Accordion.Toggle>
               </span>
 
@@ -91,11 +99,7 @@ const MyNotes = ({ search }) => {
             </Card.Header>
             <Accordion.Collapse eventKey="0">
               <Card.Body>
-                <h4>
-                  <Badge variant="success">
-                    Pais de origen - {note.country}
-                  </Badge>
-                </h4>
+                <h4>Pais de origen - {note.country}</h4>
                 <blockquote className="blockquote mb-0">
                   <p>Valor en USD dollars: {note.valueUsd}</p>
                   <img
